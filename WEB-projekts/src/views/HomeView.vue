@@ -1,18 +1,13 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
 </script>
 
 <template>
   <main>
-    <header>
-        <h1>Marta treniņi</h1>
-
         <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
         <RouterLink to="/contacts">Contacts</RouterLink>
       </nav>
-    </header>
     <main>
         <h2>Labākie treniņu plāni</h2>
         <p>
@@ -33,3 +28,11 @@ import TheWelcome from '../components/TheWelcome.vue'
     </footer>
   </main>
 </template>
+
+<style>
+.full-width-container {
+  width: 100%;
+  min-height: 100vh;
+}
+
+</style>

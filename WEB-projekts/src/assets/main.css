@@ -1,10 +1,10 @@
 @import './base.css';
 
 #app {
-  max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0;
   font-weight: normal;
+  width: 100%;
 }
 
 a,
@@ -13,6 +13,12 @@ a,
   color: hsla(160, 100%, 37%, 1);
   transition: 0.4s;
   padding: 3px;
+}
+
+.container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
 @media (hover: hover) {
@@ -31,5 +37,179 @@ a,
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding: 0 2rem;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  line-height: 1.6;
+  padding-top: 50px; /* Space for sticky navbar */
+}
+
+/* Navigation Styles */
+nav {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: #1d1d1d;
+  color: #fff;
+  padding: 15px 0;
+  text-align: center;
+  z-index: 1000;
+}
+
+nav ul {
+  list-style-type: none;
+}
+
+nav ul li {
+  display: inline;
+  margin: 0 20px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  transition: color 0.3s;
+}
+
+nav ul li a:hover {
+  color: #ff6600; /* Orange highlight */
+}
+
+/* Header Section */
+header {
+  color: #fff;
+  padding: 100px 20px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 3em;
+  margin-bottom: 10px;
+}
+
+header p {
+  font-size: 1.2em;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Main Content */
+main {
+  padding: 40px 20px;
+}
+
+h2 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  color: #ff6600;
+}
+
+section {
+  margin-bottom: 40px;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+.card img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.card h3 {
+  color: #333;
+  font-size: 1.8em;
+  margin-bottom: 10px;
+}
+
+.card p {
+  color: #666;
+  font-size: 1.1em;
+}
+
+/* Footer Styles */
+footer {
+  background-color: #1d1d1d;
+  color: #fff;
+  padding: 30px;
+  text-align: center;
+}
+
+footer p {
+  font-size: 1.1em;
+}
+
+footer a {
+  color: #ff6600;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* Button Styles */
+button {
+  background-color: #ff6600;
+  color: #fff;
+  padding: 15px 30px;
+  font-size: 1.1em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #ff3300;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+  nav ul li {
+      display: block;
+      margin: 10px 0;
+  }
+
+  header h1 {
+      font-size: 2.5em;
+  }
+
+  header p {
+      font-size: 1em;
+  }
+
+  .card {
+      margin: 10px;
+      padding: 15px;
+  }
+
+  h2 {
+      font-size: 2em;
   }
 }
