@@ -1,15 +1,17 @@
+<script setup>
+  import Foot from '@/components/Foot.vue'
+  import NavBar from '@/components/Navbar.vue'
+</script>
+
+
 <template>
 
-<nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/contacts">Contacts</RouterLink>
-      </nav>
+<NavBar />
 
       <div class="contacts">
     <h1>This is a contacts page</h1>
   </div>
-
+  <Foot />
 </template>
 
 <style>
