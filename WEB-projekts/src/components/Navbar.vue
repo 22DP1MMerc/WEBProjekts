@@ -2,13 +2,19 @@
     <nav>
       <ul>
         <li>
-          <router-link to="/" class="nav-link">Home</router-link>
+          <a href="/" class="nav-link">Home</a>
         </li>
         <li>
-          <router-link to="/about" class="nav-link">About</router-link>
+          <a href="/about" class="nav-link">About</a>
         </li>
         <li>
-          <router-link to="/contacts" class="nav-link">Contact</router-link>
+          <a href="/contacts" class="nav-link">Contact</a>
+        </li>
+        <li>
+          <a href="/login" class="nav-link">Log in</a>
+        </li>
+        <li>
+          <a href="/signup" class="nav-link">Sign up</a>
         </li>
       </ul>
     </nav>
