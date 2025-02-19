@@ -1,6 +1,3 @@
-PLAN A - workout planner/machine explainer/collection of tips
-PLAN B - 
-
-A - parāda labākos treniņu ķermeņa daļām, kā lietot noteiktas mašīnas un labāko treniņu splitus
-
-B - 
+Uztaisīti vairāki views, 
+footer, navbar un search componenti
+Ir dropdown menu, kas filtrēs vingrinājumus vai nu pēc muskuļu grupas vai pēc ekipējuma

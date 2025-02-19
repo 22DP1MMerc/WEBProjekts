@@ -2,6 +2,13 @@
     <nav>
       <ul>
         <li>
+          <a href="/routine" class="nav-link">Routines</a>
+        </li>
+        <li>
+          <a href="/exercise" class="nav-link">Exercises
+          </a>
+          </li>
+        <li>
           <a href="/" class="nav-link">Home</a>
         </li>
         <li>
