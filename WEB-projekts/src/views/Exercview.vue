@@ -4,87 +4,90 @@
   import NavBar from '@/components/Navbar.vue';
   import Search from '@/components/Search.vue';
 
-  // Reactive state to control the dropdown visibility
-  const isDropdownVisible = ref(false);
 
-  // Function to toggle the dropdown visibility
-  const toggleDropdown = () => {
-    isDropdownVisible.value = !isDropdownVisible.value;
-  };
-
-  // Close the dropdown if clicked outside
-  const closeDropdown = (event) => {
-    if (!event.target.closest('.dropdown')) {
-      isDropdownVisible.value = false;
-    }
-  };
-
-  // Add the event listener when the component is mounted
-  onMounted(() => {
-    window.addEventListener('click', closeDropdown);
-  });
-
-  // Cleanup the event listener when the component is unmounted
-  onBeforeUnmount(() => {
-    window.removeEventListener('click', closeDropdown);
-  });
 </script>
 
 <template>
   <NavBar />
   <Search />
-  <div class="dropdown">
-    <button @click="toggleDropdown" class="dropbtn">Muskuļu grupa</button>
-    <!-- Use v-show to show/hide the dropdown based on the isDropdownVisible value -->
-    <div v-show="isDropdownVisible" class="dropdown-content">
-      <a href="#">Tricepsi</a>
-      <a href="#">Bicepsi</a>
-      <a href="#">Grudaks</a>
+  <div class="dropdown-container">
+    <div class="dropdown">
+      <button @click="toggleDropdown('muscle')" class="dropbtn">Muskuļu grupa</button>
+      <div v-show="isDropdownVisible.muscle" class="dropdown-content">
+        <a href="#">Tricepsi</a>
+        <a href="#">Bicepsi</a>
+        <a href="#">Grudaks</a>
+      </div>
     </div>
-  </div>
-  <div class="dropdown">
-    <button @click="toggleDropdown" class="dropbtn">Ekipējums</button>
-    <!-- Use v-show to show/hide the dropdown based on the isDropdownVisible value -->
-    <div v-show="isDropdownVisible" class="dropdown-content">
-      <a href="#">Hanteles</a>
-      <a href="#">Stienis</a>
-      <a href="#">Kettlebell</a>
+    <div class="dropdown">
+      <button @click="toggleDropdown('equipment')" class="dropbtn">Ekipējums</button>
+      <div v-show="isDropdownVisible.equipment" class="dropdown-content">
+        <a href="#">Hanteles</a>
+        <a href="#">Stienis</a>
+        <a href="#">Kettlebell</a>
+      </div>
     </div>
   </div>
   <Foot />
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      isDropdownVisible: {
+        muscle: false,
+        equipment: false
+      }
+    };
+  },
+  methods: {
+    toggleDropdown(type) {
+      this.isDropdownVisible[type] = !this.isDropdownVisible[type];
+    }
+  }
+};
+</script>
+
 <style scoped>
-  .dropdown {
-    position: relative;
-    justify-content: center ;
-    display: flex;
+.dropbtn {
+  background-color: #ff6600;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
 
-  }
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
 
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-  }
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
 
-  /* Display dropdown content when isDropdownVisible is true */
-  .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-  }
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
 
-  .dropdown-content a:hover {
-    background-color: #f1f1f1;
-  }
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd;}
 
-  /* Show dropdown when toggled */
-  .dropdown .dropdown-content {
-    display: block;
-  }
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {background-color: #ff8c3f;}
 </style>
