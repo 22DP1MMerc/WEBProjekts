@@ -10,24 +10,41 @@
 <template>
   <NavBar />
   <Search />
-  <div class="dropdown-container">
-    <div class="dropdown">
-      <button @click="toggleDropdown('muscle')" class="dropbtn">Muskuļu grupa</button>
-      <div v-show="isDropdownVisible.muscle" class="dropdown-content">
-        <a href="#">Tricepsi</a>
-        <a href="#">Bicepsi</a>
-        <a href="#">Grudaks</a>
+  <div class="container">
+    <div class="dropdown-container">
+      <div class="dropdown">
+        <button @click="toggleDropdown('muscle')" class="dropbtn">
+          Muskuļu grupa: {{ selectedMuscle || "Visi" }}
+        </button>
+        <div v-show="isDropdownVisible.muscle" class="dropdown-content">
+          <a href="#" @click.prevent="filterByMuscle('Tricepsi')">Tricepsi</a>
+          <a href="#" @click.prevent="filterByMuscle('Bicepsi')">Bicepsi</a>
+          <a href="#" @click.prevent="filterByMuscle('Grudaks')">Grudaks</a>
+          <a href="#" @click.prevent="filterByMuscle(null)">Visi</a>
+        </div>
       </div>
-    </div>
-    <div class="dropdown">
-      <button @click="toggleDropdown('equipment')" class="dropbtn">Ekipējums</button>
-      <div v-show="isDropdownVisible.equipment" class="dropdown-content">
-        <a href="#">Hanteles</a>
-        <a href="#">Stienis</a>
-        <a href="#">Kettlebell</a>
+
+      <div class="dropdown">
+        <button @click="toggleDropdown('equipment')" class="dropbtn">
+          Ekipējums: {{ selectedEquipment || "Visi" }}
+        </button>
+        <div v-show="isDropdownVisible.equipment" class="dropdown-content">
+          <a href="#" @click.prevent="filterByEquipment('Hanteles')">Hanteles</a>
+          <a href="#" @click.prevent="filterByEquipment('Stienis')">Stienis</a>
+          <a href="#" @click.prevent="filterByEquipment('Kettlebell')">Kettlebell</a>
+          <a href="#" @click.prevent="filterByEquipment(null)">Visi</a>
+        </div>
       </div>
     </div>
   </div>
+  
+    <div class="exercise-list">
+      <ul>
+        <li v-for="exercise in filteredExercises" :key="exercise.name">
+          {{ exercise.name }} ({{ exercise.muscle }} - {{ exercise.equipment }})
+        </li>
+      </ul>
+    </div>
   <Foot />
 </template>
 
@@ -38,43 +55,81 @@ export default {
       isDropdownVisible: {
         muscle: false,
         equipment: false
-      }
+      },
+      selectedMuscle: null,
+      selectedEquipment: null,
+      exercises: [
+        { name: "Triceps Dips", muscle: "Tricepsi", equipment: "Hanteles" },
+        { name: "Biceps Curl", muscle: "Bicepsi", equipment: "Hanteles" },
+        { name: "Bench Press", muscle: "Grudaks", equipment: "Stienis" },
+        { name: "Overhead Press", muscle: "Grudaks", equipment: "Kettlebell" },
+        { name: "Triceps Extension", muscle: "Tricepsi", equipment: "Stienis" }
+      ]
     };
+  },
+  computed: {
+    filteredExercises() {
+      return this.exercises.filter(exercise => {
+        return (
+          (!this.selectedMuscle || exercise.muscle === this.selectedMuscle) &&
+          (!this.selectedEquipment || exercise.equipment === this.selectedEquipment)
+        );
+      });
+    }
   },
   methods: {
     toggleDropdown(type) {
       this.isDropdownVisible[type] = !this.isDropdownVisible[type];
+    },
+    filterByMuscle(muscle) {
+      this.selectedMuscle = muscle;
+      this.isDropdownVisible.muscle = false;
+    },
+    filterByEquipment(equipment) {
+      this.selectedEquipment = equipment;
+      this.isDropdownVisible.equipment = false;
     }
   }
 };
 </script>
 
 <style scoped>
+
+.container {
+  display: flex;
+  justify-content: center;
+  
+}
+
+.dropdown-container {
+  display: flex;
+  gap: 10px;
+}
+
 .dropbtn {
   background-color: #ff6600;
   color: white;
   padding: 16px;
   font-size: 16px;
   border: none;
+  min-width: 136px;
 }
 
-/* The container <div> - needed to position the dropdown content */
 .dropdown {
   position: relative;
   display: inline-block;
+  align-items: center;
 }
 
-/* Dropdown Content (Hidden by Default) */
 .dropdown-content {
   display: none;
   position: absolute;
   background-color: #f1f1f1;
-  min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
+  min-width: 136px;
 }
 
-/* Links inside the dropdown */
 .dropdown-content a {
   color: black;
   padding: 12px 16px;
@@ -82,12 +137,26 @@ export default {
   display: block;
 }
 
-/* Change color of dropdown links on hover */
 .dropdown-content a:hover {background-color: #ddd;}
 
-/* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {display: block;}
 
-/* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {background-color: #ff8c3f;}
+
+.exercise-list {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.exercise-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.exercise-list li {
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
 </style>
