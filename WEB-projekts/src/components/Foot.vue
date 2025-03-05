@@ -8,3 +8,9 @@
   <script setup>
 
   </script>
+
+  <style>
+.footer{
+  
+}
+</style>

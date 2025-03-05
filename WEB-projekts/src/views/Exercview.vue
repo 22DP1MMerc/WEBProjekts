@@ -10,7 +10,8 @@
 <template>
   <NavBar />
   <Search />
-  <div class="container">
+
+
     <div class="dropdown-container">
       <div class="dropdown">
         <button @click="toggleDropdown('muscle')" class="dropbtn">
@@ -36,15 +37,27 @@
         </div>
       </div>
     </div>
-  </div>
-  
+
     <div class="exercise-list">
-      <ul>
-        <li v-for="exercise in filteredExercises" :key="exercise.name">
-          {{ exercise.name }} ({{ exercise.muscle }} - {{ exercise.equipment }})
-        </li>
-      </ul>
+      <div v-if="filteredExercises.length" class="cards">
+        <div 
+          v-for="exercise in filteredExercises" 
+          :key="exercise.name" 
+          class="exercise-card"
+          @click="toggleDetails(exercise)"
+        >
+          <h3>{{ exercise.name }}</h3>
+          <p>{{ exercise.muscle }} - {{ exercise.equipment }}</p>
+          
+          <div v-if="exercise.showDetails" class="exercise-details">
+            <p><strong>Apraksts:</strong> {{ exercise.description }}</p>
+            <p><strong>Reps/Sets:</strong> {{ exercise.sets }} komplekti x {{ exercise.reps }} reps</p>
+          </div>
+        </div>
+      </div>
+      <p v-else>Nav atrasti vingrinājumi</p>
     </div>
+    
   <Foot />
 </template>
 
@@ -58,12 +71,33 @@ export default {
       },
       selectedMuscle: null,
       selectedEquipment: null,
+      searchQuery: "",
       exercises: [
-        { name: "Triceps Dips", muscle: "Tricepsi", equipment: "Hanteles" },
-        { name: "Biceps Curl", muscle: "Bicepsi", equipment: "Hanteles" },
-        { name: "Bench Press", muscle: "Grudaks", equipment: "Stienis" },
-        { name: "Overhead Press", muscle: "Grudaks", equipment: "Kettlebell" },
-        { name: "Triceps Extension", muscle: "Tricepsi", equipment: "Stienis" }
+        { 
+          name: "Triceps Dips", muscle: "Tricepsi", equipment: "Hanteles", 
+          description: "Ķermeņa svara vingrinājums, kas stiprina tricepsus.", 
+          sets: 3, reps: 12, showDetails: false 
+        },
+        { 
+          name: "Biceps Curl", muscle: "Bicepsi", equipment: "Hanteles", 
+          description: "Klasiska hanteles pacelšana bicepsa stiprināšanai.", 
+          sets: 3, reps: 10, showDetails: false 
+        },
+        { 
+          name: "Bench Press", muscle: "Grudaks", equipment: "Stienis", 
+          description: "Stieņa spiešana guļus, kas trenē krūšu muskuļus.", 
+          sets: 4, reps: 8, showDetails: false 
+        },
+        { 
+          name: "Overhead Press", muscle: "Grudaks", equipment: "Kettlebell", 
+          description: "Stumšanas kustība virs galvas, kas attīsta plecus un krūšu muskuļus.", 
+          sets: 3, reps: 10, showDetails: false 
+        },
+        { 
+          name: "Triceps Extension", muscle: "Tricepsi", equipment: "Stienis", 
+          description: "Stieņa pacelšana aiz galvas, izolējot tricepsus.", 
+          sets: 3, reps: 12, showDetails: false 
+        }
       ]
     };
   },
@@ -72,7 +106,8 @@ export default {
       return this.exercises.filter(exercise => {
         return (
           (!this.selectedMuscle || exercise.muscle === this.selectedMuscle) &&
-          (!this.selectedEquipment || exercise.equipment === this.selectedEquipment)
+          (!this.selectedEquipment || exercise.equipment === this.selectedEquipment) &&
+          exercise.name.toLowerCase().includes(this.searchQuery.toLowerCase())
         );
       });
     }
@@ -88,6 +123,9 @@ export default {
     filterByEquipment(equipment) {
       this.selectedEquipment = equipment;
       this.isDropdownVisible.equipment = false;
+    },
+    toggleDetails(exercise) {
+      exercise.showDetails = !exercise.showDetails;
     }
   }
 };
@@ -95,15 +133,11 @@ export default {
 
 <style scoped>
 
-.container {
-  display: flex;
-  justify-content: center;
-  
-}
 
 .dropdown-container {
   display: flex;
   gap: 10px;
+  justify-content: center;
 }
 
 .dropbtn {
@@ -157,6 +191,36 @@ export default {
   margin: 5px 0;
   padding: 10px;
   border-radius: 5px;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.exercise-card {
+  background: #f8f8f8;
+  padding: 15px;
+  border-radius: 8px;
+  width: 250px;
+  cursor: pointer;
+  transition: 0.3s;
+  border: 1px solid #ccc;
+}
+
+.exercise-card:hover {
+  background-color: #e0e0e0;
+}
+
+.exercise-details {
+  margin-top: 10px;
+  text-align: left;
+  background: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 </style>
