@@ -18,16 +18,16 @@
       <h3>Why Choose Us?</h3>
       <div class="feature-grid">
         <div class="feature-card">
-          <h4>🚀 AI-Powered Insights</h4>
-          <p>Get smart recommendations based on your data.</p>
+          <h4>You, But Stronger 💪</h4>
+          <p>Say hello to plans that grow with you.</p>
         </div>
         <div class="feature-card">
-          <h4>🔗 Seamless Integration</h4>
-          <p>Easily connect with your favorite tools.</p>
+          <h4>Always On Your Side 👟</h4>
+          <p>Whether it's leg day or rest day — we've got your back.</p>
         </div>
         <div class="feature-card">
-          <h4>📞 24/7 Support</h4>
-          <p>We’re here for you whenever you need help.</p>
+          <h4>Built for Real Life 🌍</h4>
+          <p>Fast, flexible, and fun — fitness for busy humans.</p>
         </div>
       </div>
     </section>
