@@ -5,7 +5,6 @@ import { RouterView } from 'vue-router'
 <template>
 
   <RouterView />
-  axios.get('http://127.0.0.1:8000/api/users')
 </template>
 
 <style scoped>
